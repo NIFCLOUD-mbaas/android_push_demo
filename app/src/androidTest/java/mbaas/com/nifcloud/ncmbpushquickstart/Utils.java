@@ -1,10 +1,16 @@
 package mbaas.com.nifcloud.ncmbpushquickstart;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject;
+import androidx.test.uiautomator.UiObjectNotFoundException;
+import androidx.test.uiautomator.UiSelector;
+
 import com.nifcloud.mbaas.core.DoneCallback;
 import com.nifcloud.mbaas.core.NCMBException;
 import com.nifcloud.mbaas.core.NCMBInstallation;
@@ -17,6 +23,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+
 public class Utils {
     private static final String TAG = "FcmService";
     public final static String NOTIFICATION_TITLE = "UITest push notification";
@@ -53,5 +61,18 @@ public class Utils {
                 });
             }
         });
+    }
+    protected static void allowPermissionsIfNeeded() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            UiDevice device = UiDevice.getInstance(getInstrumentation());
+            UiObject allowPermissions = device.findObject(new UiSelector().text("Allow"));
+            if (allowPermissions.exists()) {
+                try {
+                    allowPermissions.click();
+                } catch (UiObjectNotFoundException e) {
+                    Log.d(TAG, "Error: " + e.getMessage());
+                }
+            }
+        }
     }
 }

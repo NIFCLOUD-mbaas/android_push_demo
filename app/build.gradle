@@ -19,16 +19,20 @@ devicefarm {
 
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "mbaas.com.nifcloud.ncmbpushquickstart"
-        minSdkVersion 18
-        targetSdkVersion 30
+        minSdkVersion 26
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -41,14 +45,15 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
-    implementation 'com.google.firebase:firebase-messaging:17.1.0'
-    implementation 'com.google.android.gms:play-services-base:15.0.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "androidx.test:core:1.5.0-alpha02"
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
-    implementation files('libs/NCMB.jar')
+    implementation 'com.nifcloud.mbaas:ncmb_android:4.1.0'
 }
