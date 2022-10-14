@@ -39,11 +39,13 @@ public class ExecuteUITest {
 
     @Test
     public void initialScreen() {
+        Utils.allowPermissionsIfNeeded();
         onView(withText("Hello world!")).check(matches(isDisplayed()));
     }
 
     @Test
     public void clickOnSendNotification() throws JSONException {
+        Utils.allowPermissionsIfNeeded();
         Utils utils = new Utils();
         utils.sendPushWithSearchCondition();
         device.openNotification();
